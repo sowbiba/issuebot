@@ -176,21 +176,22 @@ module.exports = class PullRequestDataProvider {
   /**
    * Get number of approvals for a given pull_request
    *
-   * @param {int} pullRequestId
+   * @param {Object} pullRequestId
    * @param {string} owner
    * @param {string} repo
    * @returns {Promise<number>}
    */
-  async getNumberOfApprovals(pullRequestId, owner, repo) {
+  async getNumberOfApprovals(pullRequest, owner, repo) {
     const reviews = await this.githubApiClient.pulls.listReviews({
-      pull_number: pullRequestId,
+      pull_number: pullRequest.number,
       owner,
       repo,
+      per_page: 1000,
     });
 
     let nbApprovals = 0;
     reviews.data.forEach((review) => {
-      if (review.state === 'APPROVED') {
+      if (review.state === 'APPROVED' && review.commit_id === pullRequest.head.sha) {
         nbApprovals += 1;
       }
     });

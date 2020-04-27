@@ -58,7 +58,7 @@ module.exports = class PullRequestReviewRuleFinder {
         const pullRequest = context.payload.pull_request;
         const repositoryConfig = this.configProvider.getRepositoryConfigFromPullRequest(this.config, pullRequest);
         const nbApprovals = await this.pullRequestDataProvider.getNumberOfApprovals(
-          pullRequest.number,
+          pullRequest,
           context.payload.repository.owner.login,
           context.payload.repository.name,
         );

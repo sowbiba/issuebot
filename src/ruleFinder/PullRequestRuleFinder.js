@@ -107,7 +107,7 @@ module.exports = class PullRequestRuleFinder {
 
       if (Utils.issueHasLabel(pullRequest, repositoryConfig.labels.toBeMerged.name)) {
         const nbApprovals = await this.pullRequestDataProvider.getNumberOfApprovals(
-          pullRequest.number,
+          pullRequest,
           context.payload.repository.owner.login,
           context.payload.repository.name,
         );
