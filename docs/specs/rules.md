@@ -4,6 +4,23 @@ Here are the scenarii implemented in issuebot in a gherkin like syntax
 
 You can find these rules described in src/rule.js and defined in src/rules/
 
+**Scenario A1**: auto-add an Issue to the kanban when setting the milestone
+
+GIVEN an Issue not in the kanban
+
+WHEN it is milestoned for the next patch or minor release
+
+THEN it is added to the kanban in “To Do” column
+
+
+**Scenario B2**: remove an Issue from the kanban when the milestone is unset
+
+GIVEN an Issue in the kanban
+
+WHEN its milestone is unset
+
+THEN remove the Issue from the kanban
+
 
 **Scenario C1**: place an Issue in the “To do” column according to its label
 
@@ -277,6 +294,7 @@ WHEN an Issue is moved into the column “TBS”
 AND add the label “TBS” to the Issue
 
 AND remove assignee if there is one
+
 
 
 
